@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+        .wrap {
+            margin: 10px auto;
+            width: 450px;
+        }
+
+        .dollor_won {
+            margin:auto;
+        
+            color: blue;
+            font-weight: 800;
+
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#submit").click(function () {
+                if ($("#Name").val().length == 0) { alert("이름을 입력하세요."); }
+                if ($("#inputGroupSelect01").val("--수량을 선택하세요--").length==0) { alert("수량을 선택하세요"); }
+                if ($("#address").val().length == 0) { alert("주소를 입력하세요"); }
+                if ($("#Phnum").val().length == 0) { alert("전화번호를 입력하세요."); }
+            });
+        });
+
+
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    for (let i = 0; i < response.length; i++) {
+                        let won_rate = response[1]['rate'];
+                        $('#exchange').text(won_rate);
+                        return;
+                    }
+                }
+            })
+        });
+
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <img src="https://i.pinimg.com/564x/61/2d/76/612d768d26e3f9f214e218b5bbb96ad2.jpg">
+
+        <div>
+            <p></p>
+            <h3>Converse Chuck Taylor <font size=3>가격 : 50,700원/개</font>
+            </h3>
+
+            <h6>Converse Seasonal Color Chuck Taylor<br>
+                All Star Classic Black</br></h6>
+        </div>
+        <div class="dollor_won">달러-원환율<span id="exchange"></span></div>
+        <div>
+            <p></p>
+        </div>
+
+
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">주문자 이름</span>
+            </div>
+            <input type="text" class="form-control" id="Name" aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">수량</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01">
+                <option selected>--수량을 선택하세요--</option>
+                <option value="1">1ea</option>
+                <option value="2">2ea</option>
+                <option value="3">3ea</option>
+            </select>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">주소</span>
+            </div>
+            <input type="text" class="form-control" id="address" aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">전화번호</span>
+            </div>
+            <input type="text" class="form-control" id="Phnum" aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div>
+            <!-- <button type="button" onclick="submit" class="btn btn-primary btn-sm">주문하기</button> -->
+            <center><input type="submit" id="submit" class="btn btn-primary btn-sm" value="주문하기"></center>
+        </div>
+
+
+    </div>
+    </div>
+
+</body>
+
+</html>
